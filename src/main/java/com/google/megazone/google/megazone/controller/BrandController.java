@@ -5,6 +5,7 @@ import com.google.megazone.google.megazone.Repoistory.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,8 +19,13 @@ public class BrandController {
     }
 
     @PostMapping("/post")
-    public Brand putBrand(Brand brand){
+    public Brand PostBrand(Brand brand){
     return brandRepository.save(brand);
+    }
+
+    @PutMapping("/Put")
+    public Brand PutBrand(Brand brand){
+        return brandRepository.save(brand);
     }
 
     @DeleteMapping("/delete")
@@ -28,51 +34,46 @@ public class BrandController {
         brandRepository.deleteById(id);
     }
 
-
-
-//    @GetMapping("getbrand/{id}")
-//    public Optional<Brand> getBradId(@PathVariable("id") Long id)
-//    {
-//        return brandRepository.getClass();
-//    }
-
-
-//    @GetMapping("getbrand/{id}/{name}")
-//    public Brand getbrandByIdName(@PathVariable("id") Long id, @PathVariable("name") String name)
-//    {
-//
-//        Brand brand = new Brand();
-//        brand.setId(id);
-//        brand.setName(name);
-//        return brand;
-//
-//    }
-
-
-
-    @GetMapping("/getbrand2")
-    public Iterable<Brand> GetBrand2()
+    @GetMapping("/get")
+    public Brand GetBrandID(Long id)
     {
-        return brandRepository.findAll();
+        return brandRepository.findById(id).orElse(null);
     }
 
-//    @GetMapping("getbrand2")
-//    public Iterable<Brand> GetBrand2()
+//    @GetMapping("/get/member")
+//    public List<Brand> GetBrandMember(Long id, String name, Long count)
 //    {
-//        return
+//        return brandRepository.findByIdAndNameAndCount(id, name, count);
 //    }
 
-
-
-    @PutMapping("/getbrand/{data}")
-    public String UpdateBrand(@RequestParam Long Id, @RequestParam String name, @RequestParam Long count )
+    @GetMapping("/get/sql")
+    public List<Brand> GetBrandSQL(String name)
     {
-
-
-        return "Success";
-
+        return brandRepository.findBySQL("이범기");
     }
 
+
+
+    @GetMapping("/get/name")
+    public List<Brand> GetBrandName(String name)
+    {
+        return brandRepository.findByName(name);
+    }
+
+    @GetMapping("/get/name/like")
+    public List<Brand> GetBrandNameLike(String name)
+    {
+        return brandRepository.findByNameLike("%"+name+"%");
+    }
+
+
+
+
+    @GetMapping("/get/list")
+    public List<Brand> getBrandList()
+    {
+    return (List<Brand>) brandRepository.findAll();
+    }
 
 
 
