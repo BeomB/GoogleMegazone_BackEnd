@@ -34,9 +34,9 @@ public class BrandController {
     @PutMapping("/database/{name}")
     public Brand UpdateBrand(@PathVariable("name") String name)
     {
-        Brand brand = brandRepository.findByName(name);
-        brand.setCount(brand.getCount()+1);
-        brandRepository.save(brand);
+        Brand brand = brandRepository.findByName(name);     // where name=?
+        brand.setCount(brand.getCount()+1);                 // SET count=count+1
+        brandRepository.save(brand);                        //UPDATE
         return brand;
     }
 
