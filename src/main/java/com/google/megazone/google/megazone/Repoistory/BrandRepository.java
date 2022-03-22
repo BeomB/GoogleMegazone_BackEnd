@@ -1,24 +1,17 @@
 package com.google.megazone.google.megazone.Repoistory;
 
 import com.google.megazone.google.megazone.Entity.Brand;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface BrandRepository extends CrudRepository<Brand,Long > {
+public interface BrandRepository extends CrudRepository<Brand, Long> {         ///CRUD Repository 인터페이스 활용, <?,?> => Entity이름 Entity PK 값
 
+    Brand findByName(String name);         ///CRUD 인터페이스에서 알아서 찾아준다.
 
-    List<Brand> findByName(String name);
-    List<Brand> findByCount(Long count);
-    List<Brand> findByNameLike(String name);
-    List<Brand> findByIdOrNameOrCount(Long id, String name, Long count);
-
-
-    @Query(value = "select * from whatbrand where name =?1 ",nativeQuery = true) // 쿼리문으로 그 즉시 만들기  //native query = "실제 있는 SQL 문 사용하기"
-    List<Brand> findBySQL(String value1);
 
 
 }

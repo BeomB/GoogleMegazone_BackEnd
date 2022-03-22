@@ -1,22 +1,23 @@
 package com.google.megazone.google.megazone.Entity;
 
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Data
+
 @Getter
 @Setter
-@Table(name="whatbrand")        ///TABLE 명과 Entity 이름이 다를때
+@Entity
+@Data                       //Brand라는 member변수에 해당하는 getter setter가 자동으로 생성된다.
+@Table(name="whatbrand")
 public class Brand {
 
-    @GeneratedValue
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long no1;
+    private Long id;
 
     @Column
     private String name;
@@ -29,18 +30,11 @@ public class Brand {
 
     }
 
-    @Override
-    public String toString() {
-        return "Brand{" +
-                "no1=" + no1 +
-                ", name='" + name + '\'' +
-                ", count=" + count +
-                '}';
-    }
 
     public Brand(Long id, String name, Long count) {
-        this.no1 = id;
+        this.id = id;
         this.name = name;
         this.count = count;
     }
+
 }
